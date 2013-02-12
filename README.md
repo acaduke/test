@@ -67,7 +67,7 @@ following command:
 If there is an ip address like 10.11.22.1/24 configured then you are ready to go,
 otherwise you should add it:
 
-    ```bash
-    VBoxManage hostonlyif ipconfig vboxnet0 --ip 10.11.22.1 --netmask 255.255.255.0
-    ```
+```bash
+VBoxManage hostonlyif ipconfig vboxnet0 --ip 10.11.22.1 --netmask 255.255.255.0
+```
 
