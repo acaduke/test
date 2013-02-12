@@ -71,3 +71,37 @@ otherwise you should add it:
 VBoxManage hostonlyif ipconfig vboxnet0 --ip 10.11.22.1 --netmask 255.255.255.0
 ```
 
+### 4. Export UIApp directory from the Guest system
+
+#### 4.1 Linux and OSX
+
+Choose desired directory where you want to export the remote filesystem. Here we
+are using /mnt/dev. Be sure to create the dev directory. Export the guest directory manually:
+
+```bash
+$ mount -t nfs4 10.11.22.33:/home/tradeo/code /mnt/dev
+```
+
+It's recommended to mount it automatically after reboot by adding it to fstab:
+
+```bash
+$ echo "10.11.22.33:/home/tradeo/code/ /mnt/dev nfs4 defaults 0 0" >> /etc/fstab
+```
+
+This address is static so you don't have to change it.
+
+#### 4.2 Windows
+
+TODO
+
+### 5. Starting the app
+
+Controlling the uiapp service is performed by a shell script named uiapp located in the script
+directory. Do not use the exported directory to stop|start|restart the uiapp service. Always 
+control the uiapp service though a ssh connection. For example starting should be done that way:
+
+```bash
+$ vagrant ssh
+$ cd code/uiapp
+$ script/uiapp start
+```
