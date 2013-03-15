@@ -97,9 +97,14 @@ Vagrant then takes care of a [few things](https://github.com/tradeo/uiapp/wiki/R
 - Installs [Oh My Zsh](https://github.com/robbyrussell/oh-my-zsh) with our own theme
 - Exports the development dir `/home/tradeo/code` via NFS
 
-When finished starting the VDI image with vagrant you should do the following steps
-in order to have a fully operational UIApp:
-- Clone your fork for the `uiapp` and add tradeo upstream
+Using `vagrant ssh` in the `devops` directory will always drop a 
+shell with the current SSH key identity shared via a socket. That
+means SSH-ing places (like Github) will work without a password.
+
+When finished, connect to the VDI image with the mentioned method above
+and execute the following steps in order to have a fully operational UIApp:
+
+- Clone your fork for the `uiapp`. Add tradeo upstream in the forked repository.
   ```bash
   $ git clone git@github.com:yourusername/uiapp.git
   $ git remote add upstream git@github.com:tradeo/uiapp.git
@@ -118,7 +123,7 @@ in order to have a fully operational UIApp:
 
 - Seed dev database with fakes
   ```bash
-  rake db:fake:load
+  # rake db:fake:load
   ```
 
 - Prepare test database for tests
@@ -126,19 +131,10 @@ in order to have a fully operational UIApp:
   $ rake test:prepare
   ```
 
-- Finally, deploys the app to Troquebox
+- Finally, deploy the app to Troquebox
   ```bash
-  torquebox deploy
+  $ torquebox deploy
   ```
-
-Once done, it prompts for a break (CTRL-C), which btw is itself a [bug](https://github.com/mitchellh/vagrant/issues/603),
-as the script should exit upon success. Then `vagrant ssh` in the 
-`devops` directory will always drop a shell with the current SSH 
-key identity shared via a socket. That means SSH-ing places (like 
-Github) will work without a password.
-
-Once inside, the `/home/tradeo/code` directory is where all the magic happens. The `uiapp`
-repo from the fork earlier can be updated from upstream by running `git pull upstream master`.
 
 There are some sane vim and emacs defaults on the image, but for 
 more serious development, the `/home/tradeo/code` path is exported 
