@@ -123,7 +123,7 @@ and execute the following steps in order to have a fully operational UIApp:
 
 - Seed dev database with fakes
   ```bash
-  # rake db:fake:load
+  $ rake db:fake:load
   ```
 
 - Prepare test database for tests
